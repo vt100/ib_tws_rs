@@ -1,7 +1,11 @@
 use std::default::Default;
 use std::{f64, i32};
 
+#[cfg(feature="serde_support")]
+use serde::{Serialize, Deserialize};
+
 #[derive(Debug, Clone)]
+#[cfg_attr(feature = "serde_support", derive(Serialize, Deserialize))]
 pub struct ScannerSubscription {
     // The number of rows to be returned for the query.
     pub number_of_rows: i32,

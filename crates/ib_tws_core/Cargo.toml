@@ -31,8 +31,11 @@ miette = "5"
 
 document-features = "0.2"
 
+serde = {version = "1.0.167", optional = true, features=["derive"]}
+
 [features]
 default = []
 
 ## Enables the `AsyncClient`
 async = ["futures", "async-broadcast"]
+serde_support = ["serde"]

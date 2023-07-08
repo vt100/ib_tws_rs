@@ -4,6 +4,9 @@ use std::i32;
 
 use rust_decimal::Decimal;
 
+#[cfg(feature="serde_support")]
+use serde::{Serialize, Deserialize};
+
 #[derive(Debug, Clone)]
 pub struct MarketDataTypeMsg {
     pub req_id: i32,
@@ -74,6 +77,7 @@ impl DepthMktDataDescription {
 }
 
 #[derive(Debug, Clone)]
+#[cfg_attr(feature = "serde_support", derive(Serialize, Deserialize))]
 pub struct Bar {
     pub time: String,
     pub open: f64,
@@ -114,6 +118,7 @@ impl baseline::bar::Volume for Bar {
 }
 
 #[derive(Debug, Clone)]
+#[cfg_attr(feature = "serde_support", derive(Serialize, Deserialize))]
 pub struct HistoricalTick {
     pub time: i64,
     pub price: f64,
@@ -121,6 +126,7 @@ pub struct HistoricalTick {
 }
 
 #[derive(Debug, Clone)]
+#[cfg_attr(feature = "serde_support", derive(Serialize, Deserialize))]
 pub struct HistoricalTickBidAsk {
     pub time: i64,
     pub mask: i32,
@@ -131,6 +137,7 @@ pub struct HistoricalTickBidAsk {
 }
 
 #[derive(Debug, Clone)]
+#[cfg_attr(feature = "serde_support", derive(Serialize, Deserialize))]
 pub struct HistoricalTickLast {
     pub time: i64,
     pub mask: i32,
@@ -141,12 +148,14 @@ pub struct HistoricalTickLast {
 }
 
 #[derive(Debug, Clone)]
+#[cfg_attr(feature = "serde_support", derive(Serialize, Deserialize))]
 pub struct HistogramEntry {
     pub price: f64,
     pub size: i64,
 }
 
 #[derive(Debug, Default, Clone)]
+#[cfg_attr(feature = "serde_support", derive(Serialize, Deserialize))]
 pub struct TickAttr {
     pub can_auto_execute: bool,
     pub past_limit: bool,
@@ -157,6 +166,7 @@ pub struct TickAttr {
 }
 
 #[derive(Debug, Clone)]
+#[cfg_attr(feature = "serde_support", derive(Serialize, Deserialize))]
 pub struct TickByTick {
     pub tick_type: TickByTickType,
     // 0 - None, 1 - Last, 2 - AllLast, 3 -BidAsk, 4 - MidPoint
@@ -176,6 +186,7 @@ pub struct TickByTick {
 #[derive(Debug, Clone)]
 #[repr(i32)]
 #[allow(non_camel_case_types)]
+#[cfg_attr(feature = "serde_support", derive(Serialize, Deserialize))]
 pub enum TickByTickType {
     Last = 1,
     AllLast = 2,

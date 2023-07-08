@@ -3,7 +3,11 @@ use std::io;
 
 use crate::domain::tag_value::TagValue;
 
+#[cfg(feature="serde_support")]
+use serde::{Serialize, Deserialize};
+
 #[derive(Debug, Clone, Default)]
+#[cfg_attr(feature = "serde_support", derive(Serialize, Deserialize))]
 pub struct DeltaNeutralContract {
     pub con_id: i32,
     pub delta: f64,
@@ -21,6 +25,7 @@ impl DeltaNeutralContract {
 }
 
 #[derive(Debug, Clone)]
+#[cfg_attr(feature = "serde_support", derive(Serialize, Deserialize))]
 pub struct ComboLeg {
     pub con_id: i32,
     pub ratio: i32,
@@ -36,6 +41,7 @@ pub struct ComboLeg {
 }
 
 #[derive(Debug, Clone, Default)]
+#[cfg_attr(feature = "serde_support", derive(Serialize, Deserialize))]
 pub struct Contract {
     pub con_id: i32,
     pub symbol: String,
@@ -77,12 +83,14 @@ impl Contract {
 }
 
 #[derive(Debug, Clone)]
+#[cfg_attr(feature = "serde_support", derive(Serialize, Deserialize))]
 pub struct ContractDescription {
     pub contract: Contract,
     pub derivative_sec_types: Vec<String>,
 }
 
 #[derive(Debug, Clone, Default)]
+#[cfg_attr(feature = "serde_support", derive(Serialize, Deserialize))]
 pub struct ContractDetails {
     pub contract: Contract,
     pub market_name: String,
